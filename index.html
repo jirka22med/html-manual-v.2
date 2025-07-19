@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompletní HTML Manuál pro Jiříka</title>
+    <!-- Tailwind CSS pro rychlé a responzivní stylování.
+         Zajistí, aby tvůj manuál vypadal skvěle na jakémkoliv zařízení. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+         * Vlastní CSS styly pro tento manuál.
+         * Cílem je vytvořit moderní a přehledný design s tmavým tématem,
+         * který by se ti mohl líbit pro tvé "futuristické" projekty.
+         */
+
+        /* Základní styly pro celé tělo dokumentu */
+        body {
+            font-family: 'Inter', sans-serif; /* Používáme moderní a čistý font */
+            background-color: #1a202c; /* Tmavé pozadí pro celkový futuristický dojem */
+            color: #e2e8f0; /* Světlý text pro dobrý kontrast na tmavém pozadí */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Zajištění, že obsah zabere celou výšku obrazovky */
+            box-sizing: border-box; /* Zahrnuje padding a border do celkové velikosti elementu */
+        }
+
+        /* Kontejner pro obsah jednotlivých "stránek" */
+        .page-container {
+            background-color: #2d3748; /* Tmavší odstín pro kontejner obsahu */
+            padding: 40px;
+            border-radius: 16px; /* Zaoblené rohy pro moderní vzhled */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Jemný stín pro hloubku */
+            max-width: 900px; /* Maximální šířka pro lepší čitelnost */
+            width: 100%; /* Plná šířka v rámci max-width */
+            text-align: center; /* Centrování textu uvnitř kontejneru */
+            border: 2px solid #4a5568; /* Jemný rámeček */
+            box-sizing: border-box;
+            opacity: 0; /* Počáteční skrytí stránek pro hladký přechod */
+            transition: opacity 0.5s ease-in-out; /* Animace pro zobrazení stránek */
+            /* Změna: Skryté prvky jsou nyní jednoduše display: none */
+            display: none;
+        }
+
+        /* Styl pro aktivní (zobrazenou) stránku */
+        .page-container.active {
+            opacity: 1; /* Plná viditelnost */
+            /* Změna: Aktivní stránka se zobrazí jako flex kontejner */
+            display: flex;
+            flex-direction: column; /* Aby se obsah řadil pod sebe */
+            align-items: center; /* Centrování obsahu uvnitř stránky */
+        }
+
+        /* Styly pro nadpisy h1 */
+        h1 {
+            color: #63b3ed; /* Světle modrý nadpis */
+            margin-bottom: 25px;
+            font-size: 3rem; /* Velký nadpis */
+            font-weight: 800; /* Extra tučný text */
+            text-shadow: 0 0 10px rgba(99, 179, 237, 0.5); /* Svítící efekt, jako LED světla! */
+        }
+
+        /* Styly pro nadpisy h2 */
+        h2 {
+            color: #f6ad55; /* Oranžový nadpis pro podkapitoly */
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Styly pro odstavce */
+        p {
+            font-size: 1.15rem;
+            line-height: 1.7; /* Pro lepší čitelnost */
+            margin-bottom: 20px;
+            text-align: left; /* Zarovnání textu doleva */
+        }
+
+        /* Zvýrazněný text */
+        .highlight {
+            color: #f6ad55; /* Oranžová pro zvýraznění klíčových pojmů */
+            font-weight: bold;
+        }
+
+        /* Kontejner pro interaktivní prvky */
+        .interactive-box {
+            background-color: #4a5568; /* Tmavší pozadí pro interaktivní sekce */
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid #718096;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Mezera mezi prvky */
+        }
+
+        /* Styly pro akční tlačítka */
+        .action-button {
+            background-color: #48bb78; /* Zelené tlačítko */
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4); /* Stín pro 3D efekt */
+        }
+        .action-button:hover {
+            background-color: #38a169; /* Tmavší zelená při najetí myší */
+            transform: translateY(-3px); /* Lehký posun nahoru pro interaktivní pocit */
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.6); /* Výraznější stín */
+        }
+
+        /* Styly pro vstupní pole */
+        .input-field {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #a0aec0;
+            background-color: #2d3748;
+            color: #e2e8f0;
+            font-size: 1rem;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        /* Styly pro kódové bloky (pre) */
+        pre {
+            background-color: #1f2937; /* Tmavší pozadí pro kód */
+            border: 1px solid #4a5568;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            overflow-x: auto; /* Pro případ dlouhých řádků kódu */
+            font-family: 'Fira Code', 'Courier New', monospace; /* Programátorský font */
+            font-size: 0.9rem;
+            margin-top: 20px;
+            color: #a0aec0; /* Světlý text pro kód */
+        }
+
+        /* Styly pro vnitřní kód (code) */
+        code {
+            color: #e53e3e; /* Červená barva pro zvýraznění značek v textu */
+        }
+
+        /* Styly pro odrážkový seznam */
+        ul {
+            list-style-type: disc; /* Tečkový seznam */
+            padding-left: 25px; /* Odsazení seznamu */
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        /* Styly pro číslovaný seznam */
+        ol {
+            list-style-type: decimal; /* Číslovaný seznam */
+            padding-left: 25px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        /* Box pro poznámky/tipy */
+        .note-box {
+            background-color: #2c5282; /* Modré pozadí pro poznámky */
+            color: #e0f2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: left;
+            border: 1px solid #4299e1;
+            font-size: 1rem;
+        }
+
+        /* Styly pro navigační lištu pod h1 */
+        .page-nav {
+            margin-bottom: 30px; /* Mezera pod navigační lištou */
+            padding-bottom: 15px; /* Vnitřní odsazení */
+            border-bottom: 1px solid #4a5568; /* Oddělovací čára */
+            flex-wrap: wrap; /* Umožní zalamování tlačítek na menších obrazovkách */
+            display: flex; /* Používáme flexbox pro zarovnání tlačítek */
+            justify-content: center; /* Centrujeme tlačítka */
+            gap: 15px; /* Mezera mezi tlačítky */
+        }
+
+        .nav-button-top {
+            background-color: #3498db; /* Modré tlačítko */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem; /* Menší písmo pro navigaci */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            white-space: nowrap; /* Zabrání zalomení textu na tlačítku */
+        }
+        .nav-button-top:hover {
+            background-color: #2980b9; /* Tmavší modrá při najetí myší */
+            transform: translateY(-2px);
+        }
+        .nav-button-top.active {
+            background-color: #63b3ed; /* Světlejší modrá pro aktivní stránku */
+            cursor: default; /* Změna kurzoru */
+            font-weight: bold;
+            transform: none; /* Bez transformace u aktivního */
+            box-shadow: 0 2px 5px rgba(99, 179, 237, 0.4); /* Jemný stín */
+        }
+        .nav-button-top:disabled {
+            background-color: #5d6d7e; /* Šedá barva pro deaktivovaná tlačítka */
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+
+        /* Custom Message Box - náhrada za alert() */
+        .custom-message-box {
+            position: fixed; /* Pevně na obrazovce */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centrování */
+            background-color: #1c2530; /* Tmavé pozadí */
+            border: 2px solid #63b3ed; /* Modrý rámeček */
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000; /* Nad vším ostatním */
+            display: none; /* Počáteční skrytí */
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            max-width: 90%; /* Responzivní šířka */
+        }
+        .custom-message-box p {
+            margin: 0;
+            text-align: center;
+        }
+        .custom-message-box button {
+            background-color: #63b3ed;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .custom-message-box button:hover {
+            background-color: #4299e1;
+        }
+
+        /* Skrytí neaktivních stránek (původní nav-buttons byly odstraněny) */
+        /* Tento blok již není potřeba, protože display: none je výchozí pro .page-container */
+        /* .page-content:not(.active) {
+            display: none;
+        } */
+
+        /* Media queries pro responzivní design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .page-container {
+                padding: 20px;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .action-button, .nav-button-top {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            .page-nav {
+                flex-direction: column; /* Tlačítka pod sebou na mobilu */
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Globální kontejner pro všechny stránky a navigaci -->
+    <div id="main-manual-app" class="relative w-full flex flex-col items-center">
+
+        <!-- Custom Message Box Element -->
+        <div id="customMessageBox" class="custom-message-box">
+            <p id="messageBoxText"></p>
+            <button onclick="hideMessageBox()">OK</button>
+        </div>
+
+        <!-- Stránka 1: Co je to CSS? -->
+        <div id="page-css" class="page-container">
+            <h1>Co je to CSS?</h1>
+            <nav class="page-nav flex justify-center gap-4 mb-8">
+                <button class="nav-button-top" onclick="showPage('page-css')" id="nav-btn-page-css">CSS</button>
+                <button class="nav-button-top" onclick="showPage('page-html-structure')" id="nav-btn-page-html-structure">HTML Struktura</button>
+                <button class="nav-button-top" onclick="showPage('page-javascript')" id="nav-btn-page-javascript">JavaScript</button>
+                <button class="nav-button-top" onclick="showPage('page-script-tag')" id="nav-btn-page-script-tag">Značka &lt;script&gt;</button>
+                <button class="nav-button-top" onclick="showPage('page-full-example')" id="nav-btn-page-full-example">Kompletní Kód</button>
+            </nav>
+            <p>Ahoj Jiřík! Na této stránce se ponoříme do světa <strong><span class="highlight">CSS (Cascading Style Sheets)</span></strong>, což je zkratka pro <strong>Kaskádové styly</strong>. Představ si, že HTML je kostra tvého webu – text, obrázky, formuláře. Ale jak to všechno vypadá? Jakou to má barvu, velikost písma, rozložení? Přesně od toho je tu CSS!</p>
+            <p><strong>CSS dodává tvým HTML prvkům styl a vizuální podobu.</strong> Bez CSS by tvé webové stránky vypadaly jako holý text bez jakéhokoliv designu. CSS ti umožní měnit barvy textu, pozadí, velikost a typ písma, zarovnání prvků, přidávat stíny, zaoblovat rohy a v podstatě cokoliv, co souvisí s vizuální prezentací.</p>
+            <p>CSS pracuje na principu pravidel. Vybereš si nějaký HTML prvek (například odstavec, nadpis, nebo tlačítko) a pak mu přiřadíš různé stylovací vlastnosti. Například: "všechny nadpisy první úrovně budou modré a vycentrované", nebo "všechny odstavce budou mít velikost písma 16px".</p>
+            <div class="interactive-box">
+                <p id="styledParagraph" class="text-xl font-bold text-red-400 border-2 border-red-400 p-4 rounded-lg inline-block transition-all duration-300 ease-in-out cursor-pointer" onclick="toggleStyle()">
+                    Tento odstavec je ostylován pomocí CSS! Klikni na mě!
+                </p>
+                <p class="text-sm italic text-gray-400">
+                    Když klikneš, JavaScript změní některé CSS vlastnosti!
+                </p>
+            </div>
+            <p>Pomocí CSS můžeš své webové projekty udělat krásnými a atraktivními! A přesně to se ti bude hodit pro tvé moderní foto editory a dynamické grafy. Je to jako LED světla na vánočním stromku, která rozsvítí celý design!</p>
+            <!-- Původní navigační tlačítka na konci stránky odstraněna -->
+        </div>
+
+        <!-- Stránka 2: HTML Struktura/Kostra -->
+        <div id="page-html-structure" class="page-container">
+            <h1>HTML Struktura / Kostra</h1>
+            <nav class="page-nav flex justify-center gap-4 mb-8">
+                <button class="nav-button-top" onclick="showPage('page-css')" id="nav-btn-page-css">CSS</button>
+                <button class="nav-button-top" onclick="showPage('page-html-structure')" id="nav-btn-page-html-structure">HTML Struktura</button>
+                <button class="nav-button-top" onclick="showPage('page-javascript')" id="nav-btn-page-javascript">JavaScript</button>
+                <button class="nav-button-top" onclick="showPage('page-script-tag')" id="nav-btn-page-script-tag">Značka &lt;script&gt;</button>
+                <button class="nav-button-top" onclick="showPage('page-full-example')" id="nav-btn-page-full-example">Kompletní Kód</button>
+            </nav>
+            <p>Ahoj Jiřík! Dnes se podíváme na základní <strong><span class="highlight">strukturu</span></strong> každé HTML stránky, její "kostru". Bez této základní struktury by webový prohlížeč nevěděl, jak tvůj kód interpretovat a zobrazit. Je to jako plánek pro stavbu domu nebo schematický diagram Enterprise!</p>
+
+            <h2>Základní prvky HTML kostry:</h2>
+            <p>Každá HTML stránka začíná a končí několika klíčovými značkami, které definují její základní části:</p>
+
+            <ul>
+                <li><strong><code>&lt;!DOCTYPE html&gt;</code></strong>: Tohle není tak úplně HTML značka, ale deklarace, která prohlížeči říká, že se jedná o dokument HTML5. Vždycky ji dej na úplný začátek!</li>
+                <li><strong><code>&lt;html lang="cs"&gt;&lt;/html&gt;</code></strong>: Toto je kořenový element celé HTML stránky. Všechno ostatní, co patří k tvému webu, bude uvnitř těchto značek. Atribut <code>lang="cs"</code> říká prohlížeči, že jazyk obsahu stránky je čeština.</li>
+                <li><strong><code>&lt;head&gt;&lt;/head&gt;</code></strong>: V této části je schovaná "hlava" dokumentu. Obsahuje meta informace o stránce, které se uživateli přímo nezobrazují. Jsou tu věci jako:
+                    <ul>
+                        <li><code>&lt;meta charset="UTF-8"&gt;</code>: Určuje kódování znaků, aby se správně zobrazovaly české znaky (diakritika).</li>
+                        <li><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>: Klíčové pro responzivní design, zajišťuje, že se stránka správně zobrazí na mobilních zařízeních a tabletech.</li>
+                        <li><code>&lt;title&gt;Můj Super Web&lt;/title&gt;</code>: Text, který se zobrazí v záhlaví okna prohlížeče nebo na kartě.</li>
+                        <li>Odkazy na externí CSS soubory (<code>&lt;link rel="stylesheet" href="styl.css"&gt;</code>) nebo interní CSS styly (<code>&lt;style&gt;...&lt;/style&gt;</code>).</li>
+                        <li>Odkazy na JavaScript soubory nebo interní skripty.</li>
+                    </ul>
+                </li>
+                <li><strong><code>&lt;body&gt;&lt;/body&gt;</code></strong>: Tady je to hlavní! Všechno, co se uživateli zobrazí na stránce – text, obrázky, videa, tlačítka, formuláře – to vše patří sem. Představ si to jako "tělo" tvého webu.</li>
+            </ul>
+
+            <p>Takhle vypadá minimální, ale kompletní HTML kostra:</p>
+            <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="cs"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Moje První HTML Stránka&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Zde bude veškerý viditelný obsah tvé stránky, Jiřík! --&gt;
+    &lt;h1&gt;Vítejte na mé stránce!&lt;/h1&gt;
+    &lt;p&gt;Toto je ukázka základní HTML struktury.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+
+            <p>Pochopení této struktury je naprosto zásadní pro každý tvůj webový projekt, od osobní stránky až po Star Trek hudební přehrávač!</p>
+            <!-- Původní navigační tlačítka na konci stránky odstraněna -->
+        </div>
+
+        <!-- Stránka 3: Co je to JavaScript? -->
+        <div id="page-javascript" class="page-container">
+            <h1>Co je to JavaScript?</h1>
+            <nav class="page-nav flex justify-center gap-4 mb-8">
+                <button class="nav-button-top" onclick="showPage('page-css')" id="nav-btn-page-css">CSS</button>
+                <button class="nav-button-top" onclick="showPage('page-html-structure')" id="nav-btn-page-html-structure">HTML Struktura</button>
+                <button class="nav-button-top" onclick="showPage('page-javascript')" id="nav-btn-page-javascript">JavaScript</button>
+                <button class="nav-button-top" onclick="showPage('page-script-tag')" id="nav-btn-page-script-tag">Značka &lt;script&gt;</button>
+                <button class="nav-button-top" onclick="showPage('page-full-example')" id="nav-btn-page-full-example">Kompletní Kód</button>
+            </nav>
+            <p>Ahoj Jiřík! Jestliže HTML je kostra a CSS je vzhled, pak <strong><span class="highlight">JavaScript je mozek a svaly</span></strong> tvého webu! Je to programovací jazyk, který dělá webové stránky interaktivními a dynamickými. Bez něj by tvoje stránky byly statické jako papírové noviny, nebo jako vesmírná loď bez pohonných jednotek!</p>
+            <p>JavaScript ti umožňuje reagovat na akce uživatele – například když klikne na tlačítko, vyplní formulář, nebo se pohybuje myší. Díky JavaScriptu můžeš:</p>
+            <ul>
+                <li>Měnit obsah HTML elementů v reálném čase.</li>
+                <li>Měnit styly HTML elementů (např. barvu, velikost) bez načítání celé stránky.</li>
+                <li>Animovat prvky na stránce.</li>
+                <li>Ovládat audio a video.</li>
+                <li>Validovat formuláře (kontrolovat, jestli uživatel zadal správné údaje).</li>
+                <li>Komunikovat se serverem bez nutnosti přenačítání stránky (AJAX).</li>
+                <li>Vytvářet hry, jako bys chtěl pro své Star Trek projekty!</li>
+            </ul>
+            <p>JavaScript se spouští přímo v prohlížeči uživatele, což ho dělá velmi rychlým a efektivním pro interaktivní prvky. Je to esence pro tvůj futuristický cestovatelský kvíz nebo rozšířený HTML editor!</p>
+
+            <div class="interactive-box">
+                <p id="dynamicText" class="text-xl">Klikni na tlačítko a uvidíš kouzlo JavaScriptu!</p>
+                <button class="action-button" onclick="changeText()">Změň text!</button>
+            </div>
+            <!-- Původní navigační tlačítka na konci stránky odstraněna -->
+        </div>
+
+        <!-- Stránka 4: Přípojný soubor <script> -->
+        <div id="page-script-tag" class="page-container">
+            <h1>Přípojný soubor &lt;script&gt;</h1>
+            <nav class="page-nav flex justify-center gap-4 mb-8">
+                <button class="nav-button-top" onclick="showPage('page-css')" id="nav-btn-page-css">CSS</button>
+                <button class="nav-button-top" onclick="showPage('page-html-structure')" id="nav-btn-page-html-structure">HTML Struktura</button>
+                <button class="nav-button-top" onclick="showPage('page-javascript')" id="nav-btn-page-javascript">JavaScript</button>
+                <button class="nav-button-top" onclick="showPage('page-script-tag')" id="nav-btn-page-script-tag">Značka &lt;script&gt;</button>
+                <button class="nav-button-top" onclick="showPage('page-full-example')" id="nav-btn-page-full-example">Kompletní Kód</button>
+            </nav>
+            <p>Ahoj Jiřík! Už víš, že JavaScript dělá web interaktivním. Ale jak se ten JavaScript kód vlastně dostane do tvé HTML stránky? K tomu slouží značka <strong><code>&lt;script&gt;&lt;/script&gt;</code></strong>.</p>
+
+            <h2>Kde a jak použít &lt;script&gt;?</h2>
+            <p>Značka <code>&lt;script&gt;</code> může být použita dvěma hlavními způsoby:</p>
+
+            <ol>
+                <li>
+                    <p><strong>Vložený JavaScript (Internal JavaScript):</strong> Kód JavaScriptu napíšeš přímo mezi otevírací a uzavírací značku <code>&lt;script&gt;</code>.</p>
+                    <pre><code>
+&lt;script&gt;
+    // Tento JavaScript kód je přímo v HTML dokumentu
+    console.log("Ahoj, Jiřík! Toto je inline JavaScript.");
+&lt;/script&gt;
+                    </code></pre>
+                    <p>Tento způsob je vhodný pro menší skripty, které jsou specifické pro jednu stránku.</p>
+                </li>
+                <li>
+                    <p><strong>Externí JavaScript (External JavaScript):</strong> Tohle je nejpoužívanější a nejlepší praxe! JavaScript kód uložíš do samostatného souboru (např. <code>script.js</code>) a na něj pak odkážeš pomocí atributu <code>src</code> v značce <code>&lt;script&gt;</code>.</p>
+                    <pre><code>
+&lt;script src="muj-script.js"&gt;&lt;/script&gt;
+                    </code></pre>
+                    <p><strong>Výhody externích souborů:</strong></p>
+                    <ul>
+                        <li><strong>Čistota kódu:</strong> HTML, CSS a JavaScript máš oddělené, což je přehlednější.</li>
+                        <li><strong>Znovupoužitelnost:</strong> Jeden JS soubor můžeš použít na více stránkách.</li>
+                        <li><strong>Rychlejší načítání:</strong> Prohlížeč může externí JS soubor uložit do mezipaměti (cache), takže se nemusí při každém načtení stránky stahovat znovu.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h2>Kam umístit značku &lt;script&gt;?</h2>
+            <p>Můžeš ji umístit buď do sekce <code>&lt;head&gt;</code> nebo do sekce <code>&lt;body&gt;</code>. Nejčastější a doporučené místo je <strong>těsně před uzavírací značku <code>&lt;/body&gt;</code></strong>. Proč?</p>
+            <ul>
+                <li>Když prohlížeč narazí na <code>&lt;script&gt;</code> značku, pozastaví parsování HTML a nejprve stáhne a spustí JavaScript. Pokud je JavaScript v <code>&lt;head&gt;</code> a je velký, může to zpomalit zobrazení obsahu stránky.</li>
+                <li>Pokud je JavaScript na konci <code>&lt;body&gt;</code>, HTML obsah se nejprve načte a zobrazí uživateli, a teprve pak se spustí skripty. Tím zajistíš, že uživatel uvidí něco hned, i když se JavaScript ještě načítá. Také zajistíš, že JavaScript bude mít přístup ke všem HTML prvkům, které chce manipulovat, protože už budou "načtené".</li>
+            </ul>
+
+            <div class="note-box">
+                <p><strong>Tip pro pokročilé, Jiřík:</strong> Existují také atributy <code>async</code> a <code>defer</code>, které můžeš přidat ke značce <code>&lt;script src="..."&gt;</code>. Tyto atributy mění způsob, jakým prohlížeč stahuje a spouští externí JavaScript soubory, a mohou výrazně zlepšit výkon stránky!</p>
+                <ul>
+                    <li><strong><code>async</code>:</strong> Stahuje skript asynchronně (na pozadí) a spustí ho, jakmile je stažen, aniž by blokoval parsování HTML.</li>
+                    <li><strong><code>defer</code>:</strong> Stahuje skript asynchronně, ale spustí ho až poté, co je celý HTML dokument naparsován a DOM (Document Object Model) je připraven. To je obvykle nejlepší volba pro skripty, které manipulují s HTML prvky.</li>
+                    <li>Používám <code>defer</code> pro Tailwind CSS skript v hlavičce, aby se načítal na pozadí a neblokoval vykreslování stránky.</li>
+                </ul>
+            </div>
+
+            <p>Nyní už jsi připraven kombinovat tyto znalosti a tvořit kompletní a funkční webové aplikace!</p>
+            <!-- Původní navigační tlačítka na konci stránky odstraněna -->
+        </div>
+
+        <!-- Stránka 5: Ilustrační HTML kód od začátku až do konce -->
+        <div id="page-full-example" class="page-container">
+            <h1>Kompletní HTML Kód pro Jiříka</h1>
+            <nav class="page-nav flex justify-center gap-4 mb-8">
+                <button class="nav-button-top" onclick="showPage('page-css')" id="nav-btn-page-css">CSS</button>
+                <button class="nav-button-top" onclick="showPage('page-html-structure')" id="nav-btn-page-html-structure">HTML Struktura</button>
+                <button class="nav-button-top" onclick="showPage('page-javascript')" id="nav-btn-page-javascript">JavaScript</button>
+                <button class="nav-button-top" onclick="showPage('page-script-tag')" id="nav-btn-page-script-tag">Značka &lt;script&gt;</button>
+                <button class="nav-button-top" onclick="showPage('page-full-example')" id="nav-btn-page-full-example">Kompletní Kód</button>
+            </nav>
+            <p>Ahoj Jiřík! Gratuluji! Dostali jsme se až sem. Na této stránce uvidíš, jak se všechny dříve probrané koncepty – <span class="highlight">HTML struktura</span>, <span class="highlight">CSS styly</span> a <span class="highlight">JavaScript logika</span> – spojí dohromady v jeden funkční a interaktivní celek.</p>
+            <p>Tento kód ti ukazuje typickou strukturu webové stránky. Má základní HTML kostru, obsahuje interní CSS pro vizuální design a používá interní JavaScript pro interaktivitu. Můžeš to brát jako startovní bod pro tvé budoucí skvělé projekty, jako je třeba ten Star Trek hudební přehrávač, kde bys mohl nechat blikat LED světla do rytmu hudby!</p>
+
+            <h2>Ukázka kompletního kódu:</h2>
+            <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="cs"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Můj interaktivní web&lt;/title&gt;
+    &lt;!-- Odkaz na externí styly (např. Tailwind CSS nebo tvůj vlastní soubor style.css) --&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"&gt;
+    &lt;style&gt;
+        /* Interní CSS styly - pro menší projekty nebo specifické úpravy */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+        .my-button {
+            background-color: #4CAF50; /* Zelená */
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Vítejte na mém interaktivním webu!&lt;/h1&gt;
+    &lt;p id="myParagraph"&gt;Tento text se změní po kliknutí na tlačítko.&lt;/p&gt;
+    &lt;button class="my-button" onclick="changeParagraphText()"&gt;Klikni na mě!&lt;/button&gt;
+
+    &lt;!-- Externí JavaScript soubor --&gt;
+    &lt;script src="muj-interaktivni-script.js"&gt;&lt;/script&gt;
+
+    &lt;!-- Interní JavaScript (nebo po načtení externího, pokud na něm závisí) --&gt;
+    &lt;script&gt;
+        function changeParagraphText() {
+            document.getElementById('myParagraph').textContent = 'Text byl změněn JavaScriptem! Super, Jiřík!';
+            document.getElementById('myParagraph').style.color = '#e74c3c'; // Změna barvy CSS pomocí JS
+        }
+        // Ukázka interakce s uživatelem a generování obsahu
+        // Zde bys mohl vložit kód pro tvůj futuristický kvíz nebo editor
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+
+            <p>Všimni si, jak jsou jednotlivé části propojeny. HTML vytváří strukturu (nadpis, odstavec, tlačítko), CSS (a Tailwind) se stará o jejich vzhled (barvy, velikosti, zaoblení) a JavaScript dodává interaktivitu (mění text a barvu po kliknutí). Tady bys mohl začít s implementací tvých nápadů na Moderní foto editor nebo Star Trek kapitoly!</p>
+            <!-- Původní navigační tlačítka na konci stránky odstraněna -->
+        </div>
+    </div>
+
+    <script>
+        /*
+         * Hlavní JavaScript pro navigaci mezi "stránkami"
+         * a interaktivní prvky v manuálu.
+         */
+
+        // Reference na všechny "stránkové" kontejnery
+        const pages = document.querySelectorAll('.page-container');
+        // Reference na message box
+        const messageBox = document.getElementById('customMessageBox');
+        const messageBoxText = document.getElementById('messageBoxText');
+
+        // Funkce pro zobrazení zprávy (náhrada za alert())
+        function showMessage(message) {
+            messageBoxText.textContent = message;
+            messageBox.style.display = 'flex'; // Zobrazí message box
+        }
+
+        // Funkce pro skrytí zprávy
+        function hideMessageBox() {
+            messageBox.style.display = 'none'; // Skryje message box
+        }
+
+        /**
+         * Zobrazí konkrétní "stránku" a skryje všechny ostatní.
+         * Aktualizuje také stav navigační lišty.
+         * @param {string} pageId ID "stránky" k zobrazení (např. 'page-css').
+         */
+        function showPage(pageId) {
+            // Skryje všechny stránky
+            pages.forEach(page => {
+                page.classList.remove('active'); // Odstraní aktivní třídu
+            });
+
+            // Odstraní aktivní stav a zruší disabled ze všech navigačních tlačítek
+            const navButtonsTop = document.querySelectorAll('.nav-button-top');
+            navButtonsTop.forEach(button => {
+                button.classList.remove('active');
+                button.disabled = false;
+            });
+
+            // Zobrazí cílovou stránku
+            const currentPage = document.getElementById(pageId);
+            if (currentPage) {
+                currentPage.classList.add('active'); // Tato třída zajistí display:flex a opacity:1
+                // Nastaví aktivní stav pro odpovídající navigační tlačítko
+                const currentNavButton = document.getElementById(`nav-btn-${pageId}`);
+                if (currentNavButton) {
+                    currentNavButton.classList.add('active');
+                    currentNavButton.disabled = true; // Deaktivuje tlačítko aktuální stránky
+                }
+            }
+            // Posun okna na začátek stránky pro lepší UX
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- JavaScript pro interaktivní prvky na jednotlivých stránkách ---
+
+        // Na stránce "Co je to CSS?" (page-css)
+        function toggleStyle() {
+            const paragraph = document.getElementById('styledParagraph');
+            if (paragraph.classList.contains('text-red-400')) {
+                // Změna stylu pomocí Tailwind tříd a inline stylů
+                paragraph.classList.remove('text-red-400', 'border-red-400');
+                paragraph.classList.add('text-green-400', 'border-green-400');
+                paragraph.textContent = 'Vidíš? Teď jsem zelený! Kouzlo CSS a JS!';
+                paragraph.style.transform = 'scale(1.05)';
+            } else {
+                paragraph.classList.remove('text-green-400', 'border-green-400');
+                paragraph.classList.add('text-red-400', 'border-red-400');
+                paragraph.textContent = 'Tento odstavec je ostylován pomocí CSS! Klikni na mě!';
+                paragraph.style.transform = 'scale(1)';
+            }
+        }
+
+        // Na stránce "Co je to JavaScript?" (page-javascript)
+        function changeText() {
+            const paragraph = document.getElementById('dynamicText');
+            if (paragraph.textContent === 'Klikni na tlačítko a uvidíš kouzlo JavaScriptu!') {
+                paragraph.textContent = 'Ahoj Jiřík! JavaScript změnil tento text a to bez načítání stránky!';
+                paragraph.style.color = '#f6ad55'; /* Oranžová pro změněný text */
+                paragraph.style.fontWeight = 'bold';
+            } else {
+                paragraph.textContent = 'Klikni na tlačítko a uvidíš kouzlo JavaScriptu!';
+                paragraph.style.color = '#e2e8f0'; /* Vrátíme původní barvu */
+                paragraph.style.fontWeight = 'normal';
+            }
+        }
+
+        // --- Inicializace po načtení dokumentu ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Zobrazíme první stránku a aktivujeme ji s novou funkcí showPage
+            showPage('page-css');
+        });
+    </script>
+</body>
+</html>
